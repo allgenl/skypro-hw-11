@@ -17,18 +17,16 @@ def profile(uid):
     return render_template('card.html', candidate=candidate)
 
 
-@app.route("/search/<name>/") # поиск по имени
-def search(name):
-    candidate_name = get_candidates_by_name(name)
-    return render_template('search.html', candidates=candidate_name, count=len(candidate_name))
+@app.route("/search/<candidate_name>/") # поиск по имени
+def search(candidate_name):
+    candidates_name = get_candidates_by_name(candidate_name)
+    return render_template('search.html', candidates=candidates_name, count=len(candidate_name))
 
 
-# @app.route("/skills/<skill>/") # поиск по скиллу
-# def search(skill):
-#     candidate_name = get_candidates_by_skill(skill)
-#     return render_template('skills.html', candidates=candidate_name, count=len(candidate_name))
+@app.route("/skills/<skill>/") # поиск по скиллу
+def have_skills(skill):
+    candidate_name = get_candidates_by_skill(skill)
+    return render_template('skill.html', candidates=candidate_name, count=len(candidate_name), skill=skill)
 
-
-print(get_candidates_by_name("A"))
 
 app.run(debug=True)

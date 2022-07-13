@@ -47,4 +47,4 @@ def get_candidates_by_skill(skill_name):
     :param skill_name: Навый
     :return: Кандидаты
     """
-    pass
+    return [candidate for candidate in __data if skill_name.lower() in candidate['skills'].lower()]
