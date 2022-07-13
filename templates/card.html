@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ candidate.name }}</title>
+</head>
+<body>
+    {% if 'not_found' in candidate.keys() %}
+        <h1>{{ candidate.not_found }}</h1>
+    {% else %}
+        <h1>Имя кандидата: {{ candidate.name}}</h1>
+        <p>Позиция кандидата: {{ candidate.position }}</p>
+        <img src="{{ candidate.picture }}" alt="Аватар">
+        <p>Навыки кандидата: {{ candidate.skills }}</p>
+    {% endif %}
+</body>
+</html>

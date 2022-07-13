@@ -1,5 +1,6 @@
 import json
-from main import path
+
+__data = []
 
 
 def load_candidates_from_json(path):
@@ -8,9 +9,10 @@ def load_candidates_from_json(path):
     :param path: json file
     :return: Список кандидатов
     """
+    global __data
     with open(path, "r", encoding="utf-8") as file:
-        all_candidates = json.load(file)
-    return all_candidates
+        __data = json.load(file)
+    return __data
 
 
 def get_candidate(candidate_id):
@@ -19,8 +21,15 @@ def get_candidate(candidate_id):
     :param candidate_id: ID
     :return: Кандидат
     """
-    all_candidates = load_candidates_from_json("candidates.json")
-    return all_candidates[candidate_id - 1]["name"]
+    for candidate in __data:
+        if candidate['id'] == candidate_id:
+            return {
+                'name': candidate['name'],
+                'position': candidate['position'],
+                'picture': candidate['picture'],
+                'skills': candidate['skills']
+            }
+    return {'not_found': 'Кандидата с таким ID не найдено'}
 
 
 def get_candidates_by_name(candidate_name):
@@ -29,7 +38,7 @@ def get_candidates_by_name(candidate_name):
     :param candidate_name: Имя
     :return: Кандидаты
     """
-    pass
+    return [candidate for candidate in __data if candidate_name.lower() in candidate['name'].lower()]
 
 
 def get_candidates_by_skill(skill_name):
