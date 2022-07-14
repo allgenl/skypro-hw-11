@@ -44,7 +44,14 @@ def get_candidates_by_name(candidate_name):
 def get_candidates_by_skill(skill_name):
     """
     Возвращает кандидатов по навыку
-    :param skill_name: Навый
+    :param skill_name: Навык
     :return: Кандидаты
     """
-    return [candidate for candidate in __data if skill_name.lower() in candidate['skills'].lower()]
+    candidate_name = []
+    for candidate in __data:
+        candidate_skills = candidate["skills"].split(", ") # преобразование навыков кандидата в список
+        for skill in candidate_skills: # элемент списка с маленькой буквы
+            skill = skill.lower()
+        if skill_name.lower() in candidate_skills: # проверка поискового запроса в списке скиллов кандидата
+            candidate_name.append(candidate)
+    return candidate_name
